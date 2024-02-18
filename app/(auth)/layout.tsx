@@ -1,3 +1,5 @@
+import { Logo } from "./_components/Logo";
+
 export default function AuthLayout({
   children,
 }: {
@@ -5,7 +7,10 @@ export default function AuthLayout({
 }) {
   return (
     <>
-      <div className="h-full flex items-center justify-center">{children}</div>
+      <div className="h-full flex flex-col items-center justify-center space-y-6">
+        <Logo />
+        {children}
+      </div>
     </>
   );
 }
