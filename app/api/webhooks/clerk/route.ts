@@ -1,7 +1,7 @@
-import { Webhook } from "svix";
-import { headers } from "next/headers";
-import { WebhookEvent } from "@clerk/nextjs/server";
 import { db } from "@/lib/db";
+import { WebhookEvent } from "@clerk/nextjs/server";
+import { headers } from "next/headers";
+import { Webhook } from "svix";
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
@@ -53,10 +53,37 @@ export async function POST(req: Request) {
   const { id } = evt.data;
   const eventType = evt.type;
 
+  // create user
   if (eventType == "user.created") {
     await db.user.create({
       data: {
         externalUserId: payload.data.id,
+        username: payload.data.username,
+        imageUrl: payload.data.image_url,
+      },
+    });
+  }
+
+  // update user
+  if (eventType == "user.updated") {
+    // get the current user
+    const currentUser = await db.user.findUnique({
+      where: {
+        externalUserId: payload.data.id,
+      },
+    });
+
+    // if user does not exist on id return err
+    if (!currentUser) {
+      return new Response("User not found", { status: 404 });
+    }
+
+    // else if the user is found update their details
+    await db.user.update({
+      where: {
+        externalUserId: payload.data.id,
+      },
+      data: {
         username: payload.data.username,
         imageUrl: payload.data.image_url,
       },
