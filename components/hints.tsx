@@ -17,7 +17,7 @@ export function Hints({ label, children, asChild, side, align }: HintProps) {
   return (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger>{children}</TooltipTrigger>
+        <TooltipTrigger asChild={asChild}>{children}</TooltipTrigger>
         <TooltipContent
           side={side}
           align={align}
