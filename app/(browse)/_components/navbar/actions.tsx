@@ -9,13 +9,15 @@ export default async function Actions() {
     <div>
       {!user && (
         <SignInButton>
-          <Button>Login</Button>
+          <Button size={"sm"} variant={"primary"}>
+            Login
+          </Button>
         </SignInButton>
       )}
       {/* use the !! to turn the user obj to a boolean if its available */}
       {!!user && (
         <div className="flex gap-x-2 items-cente">
-          <Button variant={"ghost"} asChild>
+          <Button variant={"ghost"} asChild size={"sm"}>
             <Link href={"/u/" + user.username}>
               <Clapperboard />
               <span>Dashboard</span>

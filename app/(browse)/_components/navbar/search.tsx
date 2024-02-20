@@ -14,6 +14,7 @@ export default function Search() {
     e.preventDefault();
 
     if (!value) return;
+
     const url = qs.stringifyUrl(
       {
         url: "/",
