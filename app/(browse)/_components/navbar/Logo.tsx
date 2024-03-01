@@ -18,7 +18,7 @@ export function Logo() {
         </div>
         <div className={cn(font.className)}>
           <p className="text-lg font-semibold">Vibe</p>
-          <p className="text-xs text-muted-foreground">Just Vibe !</p>
+          <p className="text-xs text-muted-foreground">Just Vibe!</p>
         </div>
       </div>
     </Link>
